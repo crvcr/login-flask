@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <link rel="stylesheet" href="static/css/login.css">
+</head>
+
+<body>
+  <section class="login section" id="app" v-cloak>
+
+    <form @submit.prevent="login()">
+      <h1 class="title">
+        Login
+      </h1>
+      <div class="container">
+        <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input ref="usernameInput" class="input" type="text" placeholder="username" v-model="formUser.username"
+              autofocus>
+            <span class="icon is-small is-left">
+              <i class="fa fa-user"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <p class="control has-icons-left">
+            <input class="input" type="password" placeholder="password" v-model="formUser.password">
+            <span class="icon is-small is-left">
+              <i class="fa fa-lock"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <p class="control">
+            <button v-if="state !== 'loading'" class="button is-info is-fullwidth">
+              Ingresar
+            </button>
+            <button v-if="state === 'loading'" class="button is-info is-fullwidth" disabled>
+              <i class="fas fa-spinner fa-pulse"></i>
+            </button>
+          </p>
+        </div>
+    </form>
+    <div class="has-text-grey">
+      <span class="has-text-weight-bold">STATE:</span> {{ state }}
+    </div>
+    <div v-if="state === 'error'" class="notification is-danger">
+      <i class="fas fa-exclamation-triangle"></i> {{ error }}
+    </div>
+
+    <div v-if="state === 'success'" class="notification is-success">
+      <i class="far fa-check-circle"></i> {{ message }}
+    </div>
+
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="static/js/login.js"></script>
+</body>
+
+</html>
